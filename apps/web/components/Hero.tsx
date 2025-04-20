@@ -4,8 +4,8 @@ export const Hero = () => {
     return <div className="flex justify-center">
                 <div className="w-300 flex justify-center gap-50 mt-15">
                     <div className="text-5xl font-bold flex flex-col justify-center">
-                        <div>Simple. Secure</div>
-                        <div>Share files</div>
+                        <div><span className="text-blue-900">Simple.</span> Secure</div>
+                        <div><span className="text-blue-900">Share</span> files</div>
                         <div>instantly.</div>
                     </div>
                     <div>
