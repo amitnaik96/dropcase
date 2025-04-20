@@ -10,6 +10,5 @@ export default function Home() {
     <Hero />
     <Features />
     <Upload />
-    <Footer />
   </div>
 }

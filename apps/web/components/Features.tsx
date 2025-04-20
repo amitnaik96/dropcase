@@ -8,7 +8,7 @@ import {
 const ft = [
     {
         title: "Upload and share files securely",
-        description: "End-to-end encrypted and always in your control."
+        description: "Secure file sharing made simple."
     }, {
         title: "Access from anywhere",
         description: "Works on any device, fully responsive design."
