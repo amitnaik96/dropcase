@@ -55,7 +55,7 @@ export const SigninCard = () => {
                     redirect: true,
                     callbackUrl: '/'
                 })}
-                className="rounded-sm w-full bg-blue-800">Sign in with credentials</Button>
+                className="rounded-sm w-full bg-blue-800">Sign in with Credentials</Button>
             <div className="border-t border-gray-300 w-full"></div>
             <Button 
                 onClick={async () => { 
@@ -64,7 +64,7 @@ export const SigninCard = () => {
                 className="rounded-sm w-full"
             >
                 <GoogleIcon />
-                Sign in with google
+                Sign in with Google
                 </Button>
             </CardFooter>
       </Card>

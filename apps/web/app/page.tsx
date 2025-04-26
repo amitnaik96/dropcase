@@ -9,6 +9,6 @@ export default function Home() {
     <Header />
     <Hero />
     <Features />
-    <Upload />
+    <Upload/>
   </div>
 }
