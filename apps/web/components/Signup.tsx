@@ -1,4 +1,4 @@
-import { SignupCard } from './SingupCard';
+import { SignupCard } from './SignupCard';
 
 export const Signup = () => {
   return (

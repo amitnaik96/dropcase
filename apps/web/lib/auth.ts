@@ -13,6 +13,8 @@ export const NEXT_AUTH = {
             },
             async authorize(credentials: any) {
                 const { email, password } = credentials;
+                console.log(email);
+                console.log(password);
                 const response = await prisma.user.findUnique({
                     where: {email}
                 });
@@ -34,6 +36,9 @@ export const NEXT_AUTH = {
         })
     ],
     secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
+    pages: {
+        signIn: '/auth/signin',
+    },
     callbacks: {
         jwt: async ({token, user}: any) => {
             if(user) {
@@ -57,6 +62,9 @@ export const NEXT_AUTH = {
         session: ({token, session}: any) => {
             session.user.id = token.userId;
             return session;
-        } 
+        } ,
+        async redirect({ url, baseUrl }: any) {
+            return '/'
+        }
     }
 }
