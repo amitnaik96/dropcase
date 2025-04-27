@@ -1,7 +1,41 @@
+"use client";
 import { Button } from "@/components/ui/button";
-import { FileDown } from 'lucide-react';
+import { FileDown } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import axios from "axios";
+
+interface File {
+  id: string;
+  uploaderId: string;
+  fileName: string;
+  fileSize: number;
+  fileUrl: string;
+  createdAt: string;
+}
 
 export const YourFiles = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  const session: any = useSession();
+
+  useEffect(() => {
+    try {
+      async function init() {
+        if (session?.data?.user.id) {
+          console.log(session);
+          const res = await axios.get(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/files/${session.data.user.id}`
+          );
+          setFiles(res.data);
+          console.log(files);
+        }
+      }
+      init();
+    } catch (err) {
+      console.log(err);
+    }
+  }, [session, files]);
+
   return (
     <div className="flex justify-center">
       <div className="w-300 flex justify-center">
@@ -15,21 +49,37 @@ export const YourFiles = () => {
               <div>Actions</div>
             </div>
           </div>
-          <File name={"document.pdf"} size={"2.5 MB"} date={"2024-04-26"} />
+          <div className="overflow-y-auto max-h-64">
+            {files.map((file: File) => (
+              <File
+                key={file.fileName + Math.random()}
+                name={file.fileName}
+                size={file.fileSize}
+                date={file.createdAt}
+                url={file.fileUrl}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-const File = ({ name, size, date }: any) => {
+const File = ({ name, size, date, url }: any) => {
   return (
     <div className="flex text-sm  w-225 justify-center mt-3 mx-auto border-b border-gray-200">
       <div className="flex w-full justify-around mb-2">
-        <div className="flex flex-col justify-center">{name}</div>
-        <div className="flex flex-col justify-center">{size}</div>
-        <div className="flex flex-col justify-center">{date}</div>
-        <Button className="p-2"> <FileDown />Download</Button>
+        <div className="flex flex-col justify-center">{`${name.slice(0, 10)}...`}</div>
+        <div className="flex flex-col justify-center">{`${(size / 1024 / 1024).toFixed(2)}mb`}</div>
+        <div className="flex flex-col justify-center">{date.slice(0, 10)}</div>
+        <a href={url} download={name}>
+          <Button className="p-2">
+            {" "}
+            <FileDown />
+            Download
+          </Button>
+        </a>
       </div>
     </div>
   );

@@ -1,9 +1,10 @@
 import express from 'express';
 import multer from 'multer';
-import { PutObjectCommand } from '@aws-sdk/client-s3';
+import { PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
 import { s3 } from '../utils/r2'
 import { PrismaClient } from '@prisma/client'; 
 import { config } from 'dotenv';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 config();
 
 const upload = multer({ storage: multer.memoryStorage() });
@@ -33,15 +34,23 @@ router.post('/upload', upload.single('file'), async (req, res) => {
         };
 
         const command = new PutObjectCommand(params);
-        
         await s3.send(command);
 
-        const fileUrl = `${process.env.R2_DEV_ENDPOINT}/${uniqueFileName}`;
+        const getObjectCommand = new GetObjectCommand({
+            Bucket: BUCKET_NAME,
+            Key: uniqueFileName,
+            ResponseContentDisposition: `attachment; filename="${file.originalname}"`, // forces download
+        });
+
+        // presignedUrl: allows download in cors.
+        const presignedUrl = await getSignedUrl(s3, getObjectCommand);
+        // const fileUrl = `${process.env.R2_DEV_ENDPOINT}/${uniqueFileName}`;
+        
 
         const savedFile = await prisma.file.create({
             data: {
                 fileName: file.originalname,
-                fileUrl, 
+                fileUrl: presignedUrl, 
                 uploaderId: userId,
                 fileSize: file.size
             }
@@ -58,5 +67,6 @@ router.post('/upload', upload.single('file'), async (req, res) => {
         });
     }
 });
+
 
 export default router;

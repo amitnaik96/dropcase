@@ -3,10 +3,12 @@ import { CloudUpload } from "lucide-react";
 import { useRef } from "react";
 import axios from 'axios';
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export const UploadFile = () => {
   const session:any = useSession();
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const uploadFile = async (file: File, userId: string) => {
       const formData = new FormData();
@@ -21,12 +23,11 @@ export const UploadFile = () => {
 
         if (inputRef.current) {
           inputRef.current.value = '';
+          router.push('/files');
         }
         } catch (err) {
         console.log(err);
       }
-
-
   }
 
   const handleBrowseClick = () => {
@@ -44,7 +45,7 @@ export const UploadFile = () => {
 
   const handleDrop = (e: any) => {
     e.preventDefault();
-    const file = e.dataTransfer.files;
+    const file = e.dataTransfer.files?.[0];
     if (file && session?.data) {
       uploadFile(file, session.data.user.id);
     }
