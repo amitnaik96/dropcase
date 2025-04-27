@@ -18,10 +18,10 @@ DropCase is a multi-user file-sharing system that allows users to upload, downlo
     git clone https://github.com/amitnaik96/dropcase.git
     cd dropcase
 
-    # install dependencies and add .env file (refer .env.example in web, api, db)
+    # install dependencies and add .env file (refer .env.example in /apps and /packages)
     pnpm install
     
-    # run the backend  
+    # run
     pnpm run dev
 ```
 
