@@ -14,10 +14,11 @@ const router: express.Router = express.Router();
 
 router.post('/upload', upload.single('file'), async (req, res) => {
     const file = req.file;
+    const userId = req.body.userId;
 
-    if(!file) {
+    if(!file || !userId) {
         res.status(400).json({
-            message: 'No file uploaded'
+            message: 'No file or userId provided'
         });
         return;
     }
@@ -40,7 +41,9 @@ router.post('/upload', upload.single('file'), async (req, res) => {
         const savedFile = await prisma.file.create({
             data: {
                 fileName: file.originalname,
-                fileUrl
+                fileUrl, 
+                uploaderId: userId,
+                fileSize: file.size
             }
         });
 

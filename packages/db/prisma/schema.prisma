@@ -21,6 +21,7 @@ model File {
   id String @id @default(uuid()) 
   fileName String 
   fileUrl String
+  fileSize Int @default(0)
   createdAt  DateTime @default(now())
 
   uploaderId String?

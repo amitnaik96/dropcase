@@ -1,11 +1,13 @@
 import { UploadFile } from "./UploadFile";
+import { HeaderFile} from './HeaderFile';
+import { YourFiles } from './YourFiles';
 
 export const Files = () => {
   return (
-    <div className="flex justify-center">
-      <div className="w-300 flex justify-center gap-50 mt-10">
-        <UploadFile/>
-      </div>
-    </div>
+    <div className="font-[family-name:var(--font-geist-sans)]">
+            <HeaderFile />
+            <UploadFile />
+            <YourFiles />
+        </div>  
   );
 };

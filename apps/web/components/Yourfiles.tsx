@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
+import { FileDown } from 'lucide-react';
 
-export const Yourfiles = () => {
+export const YourFiles = () => {
   return (
     <div className="flex justify-center">
       <div className="w-300 flex justify-center">
@@ -25,10 +26,10 @@ const File = ({ name, size, date }: any) => {
   return (
     <div className="flex text-sm  w-225 justify-center mt-3 mx-auto border-b border-gray-200">
       <div className="flex w-full justify-around mb-2">
-        <div className="flex flex-col justify-center ml-[-20px]">{name}</div>
+        <div className="flex flex-col justify-center">{name}</div>
         <div className="flex flex-col justify-center">{size}</div>
         <div className="flex flex-col justify-center">{date}</div>
-        <Button className="p-2">Download</Button>
+        <Button className="p-2"> <FileDown />Download</Button>
       </div>
     </div>
   );

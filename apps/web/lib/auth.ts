@@ -24,6 +24,7 @@ export const NEXT_AUTH = {
                 if(isMatch) {
                     return { 
                         id: response.id,
+                        name: response.name,
                         email: response.email
                     }
                 }
