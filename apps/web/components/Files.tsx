@@ -1,11 +1,11 @@
 import { UploadFile } from "./UploadFile";
-import { HeaderFile} from './HeaderFile';
+import { Header} from './Header';
 import { YourFiles } from './YourFiles';
 
 export const Files = () => {
   return (
     <div className="font-[family-name:var(--font-geist-sans)]">
-            <HeaderFile />
+            <Header />
             <UploadFile />
             <YourFiles />
         </div>  
