@@ -8,7 +8,7 @@ DropCase is a multi-user file-sharing system that allows users to upload, downlo
 - **File Storage**: Cloudflare R2
 
 ## **Architecture**  
-![Architecture]()  
+![Architecture](https://raw.githubusercontent.com/amitnaik96/dropcase/main/apps/web/public/build.png)  
 
 ## **Installation**  
 
@@ -24,3 +24,6 @@ DropCase is a multi-user file-sharing system that allows users to upload, downlo
     # run the backend  
     pnpm run dev
 ```
+
+## License
+Distributed under the [MIT](https://github.com/amitnaik96/dropcase/blob/main/LICENSE) License .
